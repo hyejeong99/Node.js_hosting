@@ -45,8 +45,8 @@ app.get('/main', (req, res) => {
         <h1>관리자 페이지</h1>
         <form action="/auth/search_process" method="post">
             <p><input class="btn" type="submit" value="데이터 조회"></p>
-            <h3>발전소명 : ${req.session.plantId}</h3>
-            <p>조회 기간 : ${req.session.startT} ~ ${req.session.endT}</p>
+            <h3>발전소명 ${req.session.plantId}</h3>
+            <h4>조회 기간 ${req.session.totalTime} </h4>
             <table>
               <thead>
                 <tr>
@@ -63,8 +63,6 @@ app.get('/main', (req, res) => {
         </form>         
         `,
     authCheck.statusUI(req, res)
-    // authCheck.timeUI(req, res),//조회 기간
-    //authCheck.searchData(req,res)//조회 데이터
   );
   res.send(html);
 })

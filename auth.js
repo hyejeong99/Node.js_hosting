@@ -75,19 +75,15 @@ router.post('/search_process', function (request, response) {
     db.query('SELECT * FROM infotable',function(error, results, fields){
         if (error) throw error;          
         if(results.length > 0){
-            //console.log("데이터 길이?",results[0].plantId);
-            request.session.num=results.length;
-            request.session.plantId = results[0].plantId;
-            request.session.startT = results[0].startT;
-            request.session.endT = results[0].endT;
-            // request.session.date = results.date;
-            // request.session.Rid = results.Rid;
-            // request.session.period = results.period;
-            // request.session.area = results.area;
+            //데이터베이스에 있는 정보 넣어주기
+            request.session.num=results[0].length;
+            var plant = `<p>${results[0].plantId}<p/>`;
+            request.session.plantId = plant;
+            var time = `<p>${results[0].startT} ~ ${results[0].endT}<p/>`;
+            request.session.totalTime = time;
             request.session.is_data = true;
-            // request.session.save(function () {
-            //     response.redirect(`/`);
-            // });
+
+            //테이블 형식으로 로봇 정보 넣어주기
             var tableTag = '<table>\n';
             for(let i=0;i<results.length;i++){
                 tableTag += `<tr>
